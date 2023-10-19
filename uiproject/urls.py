@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main',views.mainpage,name='mainpage'),
     path('child',views.childpage,name='childpage'),
+    # path('reg',views.registration,name='registration.html'),
+    path('reg',views.registration.as_view())
 
 ]
