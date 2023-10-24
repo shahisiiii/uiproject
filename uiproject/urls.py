@@ -17,12 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from uiapp import views
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main',views.mainpage,name='mainpage'),
     path('child',views.childpage,name='childpage'),
     # path('reg',views.registration,name='registration.html'),
-    path('reg',views.registration.as_view())
+    path('reg',views.registration.as_view()),
+    path('log',views.LoginView.as_view(),name="logname"),
+    # path('log',views.StudentRegistration.as_view(),name="logname"),
+    path('studentreg',views.StudentReg.as_view()),  
 
 ]

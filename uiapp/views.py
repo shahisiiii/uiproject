@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views.generic import View
 
 from uiapp.models import RegisterModel
-
+from uiapp.forms import StudentRegistration
+from uiapp.forms import RegisterModelForm
 # Create your views here.
 
 
@@ -38,5 +39,13 @@ class registration(View):
         username=request.POST['username']
         password=request.POST['password']
         RegisterModel.objects.create(first_name=firstname,last_name=lastname,email=email,username=username,password=password)
-        return HttpResponse('saved')
+        return redirect('logname')
 
+class LoginView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'login.html')
+
+class StudentReg(View):
+    def get(self,request,*args,**kwargs):
+        regform=RegisterModelForm()
+        return render(request,'studentreg.html',{'data':regform})
