@@ -59,6 +59,54 @@ class RegisterView(View):
     def get(self,request,*args,**kwargs):
         Viewdata=RegisterModel.objects.all()
         return render(request,'regview.html',{'data':Viewdata})
+    
+class RegDelete(View):
+
+     def get(self,request,*args,**kwargs):
+        #   print(args)
+        #   print(kwargs)
+          x = RegisterModel.objects.get(id=kwargs['id'])
+        #   print(x)
+          x.delete()
+          return redirect('regview')
+    
+class RegEdit(View):
+     
+     def get(self,request,*args,**kwargs):
+          
+        vwdata= RegisterModel.objects.get(id=kwargs['id'])
+        return render(request,'update.html',{'data':vwdata})
+     
+     def post(self,request,*args,**kwargs):
+            firstname=request.POST['firstname']
+            lastname=request.POST['lastname']
+            email = request.POST['email']
+            username = request.POST['username']
+            password = request.POST['password']
+          
+
+            x = RegisterModel.objects.get(id=kwargs["id"])
+            print(x)
+            x.first_name=firstname
+            x.last_name=lastname
+            x.email=email
+            x.username=username          
+            x.password=password
+          
+            x.save()
+            return redirect('regview')
+
+
+
+ 
+
+
+
+
+
+
+
+
 
         
     
