@@ -31,6 +31,7 @@ urlpatterns = [
     path('regview',views.RegisterView.as_view(),name="regview"),
     path('regdel/<int:id>',views.RegDelete.as_view()),
     path('regedit/<int:id>',views.RegEdit.as_view()), 
+    path('emialsend',views.EmailSend.as_view()), 
 
 
 ]
