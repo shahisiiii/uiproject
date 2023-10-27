@@ -49,3 +49,16 @@ class StudentReg(View):
     def get(self,request,*args,**kwargs):
         regform=RegisterModelForm()
         return render(request,'studentreg.html',{'data':regform})
+
+class RegisterView(View):
+    def get(self,request,*args,**kwargs):
+        Viewdata=RegisterModel.objects.all()
+        print(Viewdata)
+        return render(request,'regview.html',{'data':Viewdata})
+    
+    def get(self,request,*args,**kwargs):
+        Viewdata=RegisterModel.objects.all()
+        return render(request,'regview.html',{'data':Viewdata})
+
+        
+    

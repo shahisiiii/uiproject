@@ -28,5 +28,6 @@ urlpatterns = [
     path('log',views.LoginView.as_view(),name="logname"),
     # path('log',views.StudentRegistration.as_view(),name="logname"),
     path('studentreg',views.StudentReg.as_view()),  
+    path('regview',views.RegisterView.as_view()),  
 
 ]
