@@ -30,3 +30,4 @@ urlpatterns = [
     path('studentreg',views.StudentReg.as_view()),  
 
 ]
+
