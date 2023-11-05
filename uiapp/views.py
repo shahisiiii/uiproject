@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views.generic import View
 from uiapp.models import RegisterModel
-from uiapp.forms import StudentRegistration
-from uiapp.forms import RegisterModelForm
+from uiapp.forms import StudentRegistration,RegisterModelForm,SignUpForm,SignInForm
 from django.core.mail import send_mail,settings
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+
 # Create your views here.
 
 
@@ -113,15 +115,34 @@ class EmailSend(View):
             x="something went wrong"
         return HttpResponse(x)
 
+class SignUp(View):
+    def get(self,request,*args,**kwargs):
+        form=SignUpForm()
+        return render(request,"signup.html",{"form":form})
+    def post(self,request,*args,**kwargs):
+        form=SignUpForm(request.POST)
+        print(form)
+        if form.is_valid():
+            # form.save()
+            User.objects.create_user(**form.cleaned_data)
+            return HttpResponse("saved")
+    
 
-
-
-
-
- 
-
-
-
+class SignIn(View):
+    def get(self,request,*args,**kwargs):
+        form=SignInForm()
+        return render(request,"signin.html",{"form":form})
+    def post(self,request,*args,**kwargs):
+        form=SignInForm(request.POST)
+        if form.is_valid():
+            user_name=form.cleaned_data.get("username")
+            pass_word=form.cleaned_data.get("password")
+            user=authenticate(request,username=user_name,password=pass_word)
+            if user:
+                login(request,user)
+                return HttpResponse("login successfuly")
+            else:
+                return HttpResponse("invalid credential")
 
 
 

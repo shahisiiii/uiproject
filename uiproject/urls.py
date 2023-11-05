@@ -32,7 +32,8 @@ urlpatterns = [
     path('regdel/<int:id>',views.RegDelete.as_view()),
     path('regedit/<int:id>',views.RegEdit.as_view()), 
     path('emialsend',views.EmailSend.as_view()), 
-
+    path('signup',views.SignUp.as_view()), 
+    path('signin',views.SignIn.as_view()), 
 
 ]
 
